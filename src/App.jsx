@@ -3,10 +3,13 @@ import AvatarGenerator from "./components/AvatarGenerator";
 import SEO from "./components/SEO";
 import "./index.css";
 import Footer from "./components/Footer";
+import { BackgroundBeams } from "./components/ui/background-beams";
+
 
 function App() {
   return (
-    <>
+    <div className="flex-col relative min-h-screen">
+      <BackgroundBeams className="-z-10" />
       <SEO
         title="Random Avatar Generator - Create Unique SVG Avatars"
         description="Generate random avatars with customizable features. Download as SVG. No third-party libraries used. Built with React and Vite."
@@ -22,7 +25,10 @@ function App() {
         </main>
 
         <div className="footer1">
-          <p>Built with PASSION & L<span className="text-red-400">&hearts;</span>VE • All Avatars generated with Pure SVG</p>
+          <p>
+            Built with PASSION & L<span className="text-red-400">&hearts;</span>
+            VE • All Avatars generated with Pure SVG
+          </p>
           <div className="footer-links">
             <a href="/sitemap.xml" aria-label="Sitemap">
               Sitemap
@@ -36,11 +42,10 @@ function App() {
           </div>
         </div>
         <footer>
-          <Footer/>
+          <Footer />
         </footer>
-
       </div>
-    </>
+    </div>
   );
 }
 

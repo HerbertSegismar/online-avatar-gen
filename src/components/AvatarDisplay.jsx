@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import Face from "./Face";
 import Hair from "./Hair";
 import Eyes from "./Eyes";
@@ -62,8 +62,8 @@ function AvatarDisplay({
   return (
     <svg
       ref={svgRef}
-      width="300"
-      height="300"
+      width="250"
+      height="250"
       viewBox="0 0 200 200"
       xmlns="http://www.w3.org/2000/svg"
       style={{ backgroundColor: "transparent" }}

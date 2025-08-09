@@ -1,4 +1,4 @@
-import React from "react";
+
 
 function Hair({ hair, faceX, faceY, faceSize, padding }) {
   const { style, color, flipped } = hair;
@@ -10,7 +10,7 @@ function Hair({ hair, faceX, faceY, faceSize, padding }) {
       return (
         <rect
           x={faceX - faceSize / 2}
-          y={faceY - faceSize / 2 - 15 - topPadding}
+          y={faceY*1.25 - faceSize / 2 - 15 - topPadding}
           width={faceSize}
           height={20}
           fill={color}
@@ -23,7 +23,7 @@ function Hair({ hair, faceX, faceY, faceSize, padding }) {
         <g>
           <rect
             x={faceX - faceSize / 2}
-            y={faceY - faceSize / 2 - 15 - topPadding}
+            y={faceY*1.2 - faceSize / 2 - 15 - topPadding}
             width={faceSize}
             height={20}
             fill={color}
@@ -53,7 +53,7 @@ function Hair({ hair, faceX, faceY, faceSize, padding }) {
         <g>
           <ellipse
             cx={faceX}
-            cy={faceY - faceSize / 2 - 10 - topPadding}
+            cy={faceY*1.25 - faceSize / 2 - 10 - topPadding}
             rx={faceSize / 2}
             ry={15}
             fill={color}
@@ -74,16 +74,16 @@ function Hair({ hair, faceX, faceY, faceSize, padding }) {
     case "spiky":
       return (
         <g>
-          {[...Array(7)].map((_, i) => {
+          {[...Array(6)].map((_, i) => {
             const x = faceX - faceSize / 2 + (i * faceSize) / 6;
             return (
               <path
                 key={i}
-                d={`M${x} ${faceY - faceSize / 2 - topPadding} 
+                d={`M${x} ${faceY*1.2 - faceSize / 2 - topPadding} 
                      L${x + faceSize / 12} ${
-                  faceY - faceSize / 2 - 20 - topPadding
+                  faceY*1.15 - faceSize / 2 - 20 - topPadding
                 } 
-                     L${x + faceSize / 6} ${faceY - faceSize / 2 - topPadding}`}
+                     L${x + faceSize / 6} ${faceY*1.15 - faceSize / 2 - topPadding}`}
                 fill={color}
               />
             );

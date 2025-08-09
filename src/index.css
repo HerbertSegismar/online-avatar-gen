@@ -4,7 +4,7 @@
 body {
   margin: 0;
   font-family: Oswald, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #f5f7fa, #e4edf9);
+  background: linear-gradient(135deg, #2b2e34ff, #102034ff);
   color: #333;
   display: flex;
   justify-content: center;

@@ -1,4 +1,3 @@
-import React from "react";
 
 function Accessories({
   accessories,
@@ -29,7 +28,7 @@ function Accessories({
       )}
 
       {beard && (
-        <Beard x={faceX} y={faceY + 20} size={faceSize} color={color} />
+        <Beard x={faceX} y={faceY + 30} size={faceSize} color={color} />
       )}
     </>
   );
@@ -97,17 +96,17 @@ function Beard({ x, y, size, color }) {
   return (
     <g>
       <path
-        d={`M${x - size / 3} ${y} 
-             Q${x} ${y + size / 4}, ${x + size / 3} ${y}`}
-        fill="none"
+        d={`M${x - size /3.4} ${y} 
+             Q${x} ${y + size / 5}, ${x + size / 3} ${y}`}
+        fill={"none"}
         stroke={color}
         strokeWidth="3"
       />
       <path
         d={`M${x - size / 4} ${y + 5} 
-             Q${x - size / 8} ${y + size / 6}, ${x} ${y + size / 6}
-             Q${x + size / 8} ${y + size / 6}, ${x + size / 4} ${y + 5}`}
-        fill="none"
+             Q${x - size / 9} ${y + size / 4}, ${x} ${y + size / 9}
+             Q${x + size / 7} ${y + size / 4}, ${x + size / 3.5} ${y +4}`}
+        fill={color}
         stroke={color}
         strokeWidth="3"
       />

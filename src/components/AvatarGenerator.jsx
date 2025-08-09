@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import AvatarDisplay from "./AvatarDisplay";
 
 function clamp(value, min, max) {

@@ -1,4 +1,3 @@
-import React from "react";
 
 function Eyes({ eyes, faceX, eyeY, eyeSize, eyeSpacing }) {
   const { type, color } = eyes;

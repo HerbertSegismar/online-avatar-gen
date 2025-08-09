@@ -1,4 +1,3 @@
-import React from "react";
 import { clamp } from "./AvatarGenerator";
 
 function Face({ face, faceX, faceY, faceSize }) {

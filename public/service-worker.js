@@ -6,9 +6,7 @@ const urlsToCache = [
   "/",
   "/index.html",
   "/manifest.json",
-  "/favicon.ico",
-  "/icon-192x192.png",
-  "/icon-512x512.png",
+  "/icon.svg",
   // Add other assets you want to cache
 ];
 
