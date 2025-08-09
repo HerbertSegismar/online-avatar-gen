@@ -1,4 +1,3 @@
-import React from "react";
 import AvatarGenerator from "./components/AvatarGenerator";
 import SEO from "./components/SEO";
 import "./index.css";
