@@ -9,12 +9,12 @@ import { BackgroundBeams } from "./components/ui/background-beams";
 function App() {
   return (
     <div className="flex-col relative min-h-screen">
-      <BackgroundBeams className="-z-10" />
       <SEO
         title="Random Avatar Generator - Create Unique SVG Avatars"
         description="Generate random avatars with customizable features. Download as SVG. No third-party libraries used. Built with React and Vite."
       />
-      <div className="app">
+      <BackgroundBeams className="fixed -z-10" />
+      <div className="app relative z-10">
         <header>
           <h1>Random Avatar Generator</h1>
           <p>Create unique SVG avatars with random features</p>
