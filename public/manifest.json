@@ -1,6 +1,6 @@
 {
-  "name": "Online Avatar Generator",
-  "short_name": "AvatarGen",
+  "name": "Free Avatar Generator",
+  "short_name": "FreeAvatarGenerator",
   "description": "Generate unique SVG avatars with random features",
   "start_url": "/",
   "display": "standalone",

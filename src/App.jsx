@@ -1,51 +1,25 @@
-import AvatarGenerator from "./components/AvatarGenerator";
-import SEO from "./components/SEO";
-import "./index.css";
-import Footer from "./components/Footer";
-import { BackgroundBeams } from "./components/ui/background-beams";
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom"
+import RootLayout from "./components/RootLayout"
+import Home from "./components/Home";
+import Terms from "./components/Terms";
+import Privacy from "./components/Privacy";
+import NotFound from "./components/NotFound";
 
+const App = () => {
 
-function App() {
+  const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<RootLayout />}>
+      <Route index element={<Home />} />
+      <Route path="terms" element={<Terms />} />
+      <Route path="privacy" element={<Privacy />} />
+      <Route path="*" element={<NotFound />} />
+    </Route>
+  )
+);
   return (
-    <div className="flex-col relative min-h-screen">
-      <SEO
-        title="Random Avatar Generator - Create Unique SVG Avatars"
-        description="Generate random avatars with customizable features. Download as SVG. No third-party libraries used. Built with React and Vite."
-      />
-      <BackgroundBeams className="fixed -z-10" />
-      <div className="app relative z-10">
-        <header>
-          <h1>Random Avatar Generator</h1>
-          <p>Create unique SVG avatars with random features</p>
-        </header>
-
-        <main>
-          <AvatarGenerator />
-        </main>
-
-        <div className="footer1">
-          <p>
-            Built with PASSION & L<span className="text-red-400">&hearts;</span>
-            VE • All Avatars generated with Pure SVG
-          </p>
-          <div className="footer-links">
-            <a href="/sitemap.xml" aria-label="Sitemap">
-              Sitemap
-            </a>
-            <a href="/privacy" aria-label="Privacy Policy">
-              Privacy
-            </a>
-            <a href="/terms" aria-label="Terms of Service">
-              Terms
-            </a>
-          </div>
-        </div>
-        <footer>
-          <Footer />
-        </footer>
-      </div>
-    </div>
-  );
+    <RouterProvider router={router}/>
+  )
 }
 
-export default App;
+export default App

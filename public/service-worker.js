@@ -4,6 +4,8 @@ const CACHE_NAME = "avatar-generator-v1";
 // Files to cache
 const urlsToCache = [
   "/",
+  "/terms",
+  "/privacy",
   "/index.html",
   "/manifest.json",
   "/icon.svg",

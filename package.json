@@ -1,5 +1,5 @@
 {
-  "name": "online-avatar-generator",
+  "name": "free-avatar-generator",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -13,10 +13,10 @@
     "@tailwindcss/vite": "^4.1.11",
     "clsx": "^2.1.1",
     "motion": "^12.23.12",
-    "react": "^19.1.1",
+    "react": "^19.0",
     "react-dom": "^19.1.1",
-    "react-helmet": "^6.1.0",
     "react-helmet-async": "^2.0.5",
+    "react-router-dom": "^7.8.0",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.11"
   },
