@@ -33,10 +33,24 @@ function getVibrantColor() {
 
 function generateRandomFace() {
   return {
-    shape: getRandomItem(["circle", "oval", "square", "rounded-square"]),
+    shape: getRandomItem([
+      "circle",
+      "oval",
+      "square",
+      "rounded-square",
+      "heart",
+      "diamond",
+      "pear",
+      "asymmetric",
+      "hexagon",
+      "rounded-triangle",
+    ]),
     color: getVibrantColor(),
-    size: 150 + Math.floor(Math.random() * 20),
+    size: 120 + Math.floor(Math.random() * 60),
     rotation: Math.floor(Math.random() * 10) - 5,
+    bgWidthMultiplier: 1.8 + Math.random() * 0.4,
+    bgHeightMultiplier: 2.2 + Math.random() * 0.4,
+    bgRoundness: Math.floor(Math.random() * 20) + 10,
   };
 }
 
@@ -50,7 +64,16 @@ function generateRandomHair() {
 
 function generateRandomEyes() {
   return {
-    type: getRandomItem(["circle", "oval", "rectangle", "closed"]),
+    type: getRandomItem([
+      "realistic",
+      "anime",
+      "sleepy",
+      "sparkle",
+      "circle",
+      "oval",
+      "rectangle",
+      "closed",
+    ]),
     color: getVibrantColor(),
     size: 8 + Math.floor(Math.random() * 8),
     spacing: 20 + Math.floor(Math.random() * 20),
@@ -85,7 +108,7 @@ function AvatarGenerator() {
   const [mouth, setMouth] = useState(generateRandomMouth());
   const [accessories, setAccessories] = useState(generateRandomAccessories());
   const [backgroundColor, setBackgroundColor] = useState(getVibrantColor());
-  const [padding] = useState(Math.floor(Math.random() * 30) + 10);
+  const [padding] = useState(Math.floor(Math.random() * 40) + 20); // Increased padding range
 
   const regenerateAll = () => {
     setFace(generateRandomFace());
@@ -99,7 +122,7 @@ function AvatarGenerator() {
   return (
     <div className="avatar-generator">
       <div className="avatar-container">
-        <div className="avatar-display">
+        <div className="avatar-display w-full max-w-md aspect-square mx-auto p-4">
           <AvatarDisplay
             face={face}
             hair={hair}

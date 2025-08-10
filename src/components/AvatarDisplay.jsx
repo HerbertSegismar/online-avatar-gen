@@ -17,31 +17,35 @@ function AvatarDisplay({
 }) {
   const svgRef = useRef(null);
 
-  // Center the face with padding
-  const faceX = 100;
-  const faceY = 100 - padding / 4;
+  // Center coordinates
+  const centerX = 100;
+  const centerY = 110;
+  const faceSize = clamp(face.size, 100, 150);
 
-  // Clamp face size to reasonable values
-  const faceSize = clamp(face.size, 120, 180);
+  // Calculate positions with clamping
+  const maxHairHeight = faceSize * 0.4;
+  const hairTop = clamp(
+    centerY - faceSize / 2 - padding / 2,
+    centerY - faceSize / 2 - maxHairHeight,
+    centerY - faceSize / 2 + 10
+  );
 
-  // Clamp eye size and position
+  // Facial feature positions
+  const eyeY = centerY - faceSize * 0.2;
+  const mouthY = centerY + faceSize * 0.3;
+
+  // Clamp sizes
   const eyeSize = clamp(eyes.size, 5, 20);
   const eyeSpacing = clamp(eyes.spacing, 15, 40);
-  const eyeY = clamp(faceY - 20, faceY - 40, faceY);
-
-  // Clamp mouth position and size
   const mouthSize = clamp(mouth.size, 10, 30);
-  const mouthY = clamp(faceY + 30, faceY + 10, faceY + 50);
 
   // Download functionality
   useEffect(() => {
     const handleDownload = () => {
       if (!svgRef.current) return;
-
       const svgData = new XMLSerializer().serializeToString(svgRef.current);
       const blob = new Blob([svgData], { type: "image/svg+xml" });
       const url = URL.createObjectURL(blob);
-
       const link = document.createElement("a");
       link.href = url;
       link.download = "random-avatar.svg";
@@ -50,10 +54,8 @@ function AvatarDisplay({
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
     };
-
     const svgElement = svgRef.current;
     svgElement?.addEventListener("download", handleDownload);
-
     return () => {
       svgElement?.removeEventListener("download", handleDownload);
     };
@@ -68,23 +70,27 @@ function AvatarDisplay({
       xmlns="http://www.w3.org/2000/svg"
       style={{ backgroundColor: "transparent" }}
     >
-      <rect width="200" height="200" fill={backgroundColor} />
-      <g transform={`rotate(${face.rotation} ${faceX} ${faceY})`}>
-        <Face face={face} faceX={faceX} faceY={faceY} faceSize={faceSize} />
+      <rect width="200" height="200" rx="20" fill={backgroundColor} />
 
+      <g transform={`rotate(${face.rotation} ${centerX} ${centerY})`}>
+        {/* Face rendered first */}
+        <Face face={face} faceX={centerX} faceY={centerY} faceSize={faceSize} />
+
+        {/* Hair rendered AFTER face to ensure it appears in front */}
         {hair.style !== "bald" && (
           <Hair
             hair={hair}
-            faceX={faceX}
-            faceY={faceY}
+            faceX={centerX}
+            hairTop={hairTop}
             faceSize={faceSize}
-            padding={padding}
+            faceTop={centerY - faceSize / 2}
           />
         )}
 
+        {/* Facial features */}
         <Eyes
           eyes={eyes}
-          faceX={faceX}
+          faceX={centerX}
           eyeY={eyeY}
           eyeSize={eyeSize}
           eyeSpacing={eyeSpacing}
@@ -92,19 +98,18 @@ function AvatarDisplay({
 
         <Mouth
           mouth={mouth}
-          faceX={faceX}
+          faceX={centerX}
           mouthY={mouthY}
           mouthSize={mouthSize}
         />
 
         <Accessories
           accessories={accessories}
-          faceX={faceX}
-          faceY={faceY}
+          faceX={centerX}
+          faceY={centerY}
           faceSize={faceSize}
           eyeY={eyeY}
           eyeSpacing={eyeSpacing}
-          padding={padding}
         />
       </g>
     </svg>

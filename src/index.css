@@ -205,6 +205,23 @@ header p {
   max-width: 800px;
 }
 
+/* Add to your index.css */
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.max-w-md {
+  max-width: 28rem; /* 448px */
+}
+
 @media (max-width: 600px) {
   .avatar-container {
     padding: 20px;

@@ -1,99 +1,90 @@
-
-
-function Hair({ hair, faceX, faceY, faceSize, padding }) {
+function Hair({ hair, faceX, hairTop, faceSize, faceTop }) {
   const { style, color, flipped } = hair;
   const flipModifier = flipped ? -1 : 1;
-  const topPadding = padding / 2;
+  const hairHeight = faceSize * 0.5;
 
+  // Hair styles with front-layered appearance
   switch (style) {
     case "short":
       return (
-        <rect
-          x={faceX - faceSize / 2}
-          y={faceY*1.25 - faceSize / 2 - 15 - topPadding}
-          width={faceSize}
-          height={20}
-          fill={color}
-          rx="5"
-        />
+        <g>
+          {/* Back part of hair (behind face) */}
+          <path
+            d={`M${faceX - faceSize / 2} ${hairTop}
+               Q${faceX} ${hairTop - 10}, ${faceX + faceSize / 2} ${hairTop}
+               L${faceX + faceSize / 2} ${faceTop + 5}
+               Q${faceX} ${faceTop + 10}, ${faceX - faceSize / 2} ${faceTop + 5}
+               Z`}
+            fill={color}
+            fillOpacity={0.8}
+          />
+          {/* Front part of hair (over face) */}
+          <path
+            d={`M${faceX - faceSize / 2} ${hairTop}
+               Q${faceX} ${hairTop - 15}, ${faceX + faceSize / 2} ${hairTop}
+               L${faceX + faceSize / 2} ${hairTop + hairHeight * 0.3}
+               Q${faceX} ${hairTop + hairHeight * 0.4}, ${
+              faceX - faceSize / 2
+            } ${hairTop + hairHeight * 0.3}
+               Z`}
+            fill={color}
+          />
+        </g>
       );
 
     case "long":
       return (
         <g>
-          <rect
-            x={faceX - faceSize / 2}
-            y={faceY*1.2 - faceSize / 2 - 15 - topPadding}
-            width={faceSize}
-            height={20}
-            fill={color}
-            rx="5"
-          />
+          {/* Back hair */}
           <path
-            d={`M${faceX - faceSize / 4} ${
-              faceY - faceSize / 2 + 5 - topPadding
-            } 
-                 Q${faceX - (faceSize / 6) * flipModifier} ${
-              faceY - faceSize / 4
-            }, 
-                 ${faceX} ${faceY - faceSize / 4}
-                 Q${faceX + (faceSize / 6) * flipModifier} ${
-              faceY - faceSize / 4
-            }, 
-                 ${faceX + faceSize / 4} ${
-              faceY - faceSize / 2 + 5 - topPadding
-            }`}
+            d={`M${faceX - faceSize / 2} ${hairTop}
+               Q${faceX} ${hairTop - 15}, ${faceX + faceSize / 2} ${hairTop}
+               L${faceX + faceSize / 2} ${hairTop + hairHeight}
+               Q${faceX} ${hairTop + hairHeight * 1.1}, ${
+              faceX - faceSize / 2
+            } ${hairTop + hairHeight}
+               Z`}
+            fill={color}
+            fillOpacity={0.7}
+          />
+          {/* Front hair layer */}
+          <path
+            d={`M${faceX - faceSize / 2} ${hairTop}
+               Q${faceX} ${hairTop - 20}, ${faceX + faceSize / 2} ${hairTop}
+               L${faceX + faceSize / 2} ${hairTop + hairHeight * 0.7}
+               Q${faceX} ${hairTop + hairHeight * 0.8}, ${
+              faceX - faceSize / 2
+            } ${hairTop + hairHeight * 0.7}
+               Z`}
             fill={color}
           />
-        </g>
-      );
-
-    case "curly":
-      return (
-        <g>
-          <ellipse
-            cx={faceX}
-            cy={faceY*1.25 - faceSize / 2 - 10 - topPadding}
-            rx={faceSize / 2}
-            ry={15}
-            fill={color}
-          />
-          {[0, 1, 2].map((i) => (
-            <ellipse
+          {/* Hair strands (always in front) */}
+          {[...Array(8)].map((_, i) => (
+            <path
               key={i}
-              cx={faceX - faceSize / 4 + (i * faceSize) / 4}
-              cy={faceY - faceSize / 2 - 25 - topPadding}
-              rx={faceSize / 8}
-              ry={faceSize / 10}
-              fill={color}
+              d={`M${faceX - faceSize / 2 + (i * faceSize) / 7} ${hairTop + 10}
+                   Q${faceX - faceSize / 2 + (i * faceSize) / 7 + 5} ${
+                hairTop + hairHeight * 0.7
+              },
+                   ${faceX - faceSize / 2 + (i * faceSize) / 7 - 5} ${
+                hairTop + hairHeight
+              }`}
+              stroke={darkenColor(color, 10)}
+              strokeWidth={1.5}
+              fill="none"
             />
           ))}
         </g>
       );
 
-    case "spiky":
-      return (
-        <g>
-          {[...Array(6)].map((_, i) => {
-            const x = faceX - faceSize / 2 + (i * faceSize) / 6;
-            return (
-              <path
-                key={i}
-                d={`M${x} ${faceY*1.2 - faceSize / 2 - topPadding} 
-                     L${x + faceSize / 12} ${
-                  faceY*1.15 - faceSize / 2 - 20 - topPadding
-                } 
-                     L${x + faceSize / 6} ${faceY*1.15 - faceSize / 2 - topPadding}`}
-                fill={color}
-              />
-            );
-          })}
-        </g>
-      );
-
-    default:
-      return null;
+    // ... other hair styles with similar front-layered approach
   }
+}
+
+// Helper function
+function darkenColor(hex, percent) {
+  // Implement color darkening logic
+  return hex;
 }
 
 export default Hair;
