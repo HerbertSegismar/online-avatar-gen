@@ -1,17 +1,8 @@
-// src/components/Terms.jsx
-import React from "react";
-import SEO from "./SEO";
+
 import { Link } from "react-router-dom";
 
 const Terms = () => {
   return (
-    <>
-      <SEO
-        title="Terms of Service - Free Avatar Generator"
-        description="Read our Terms of Service for using the Free Avatar Generator."
-        path="/terms"
-      />
-
       <div className="max-w-4xl mx-auto px-4 py-8">
         <div className="text-center mb-10">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-100 mb-4">
@@ -142,7 +133,6 @@ const Terms = () => {
           </div>
         </div>
       </div>
-    </>
   );
 };
 

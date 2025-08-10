@@ -1,16 +1,8 @@
-// src/components/Privacy.jsx
-import React from "react";
-import SEO from "./SEO";
+
 import { Link } from "react-router-dom";
 
 const Privacy = () => {
   return (
-    <>
-      <SEO
-        title="Privacy Policy - Free Avatar Generator"
-        description="Read our Privacy Policy to understand how we handle your information."
-        path="/privacy"
-      />
 
       <div className="max-w-4xl mx-auto px-4 py-8">
         <div className="text-center mb-10">
@@ -85,11 +77,11 @@ const Privacy = () => {
             <ul className="list-disc pl-6 text-gray-700 space-y-2 mb-4">
               <li>
                 <span className="font-medium">Hosting:</span> Our website is
-                hosted on Vercel
+                hosted on namecheap.com
               </li>
               <li>
-                <span className="font-medium">Advertisements:</span> We use
-                Ezoic to display ads, which may collect data as described in
+                <span className="font-medium">Advertisements:</span> We use ad
+                providers to display ads, which may collect data as described in
                 their privacy policy
               </li>
             </ul>
@@ -174,7 +166,6 @@ const Privacy = () => {
           </div>
         </div>
       </div>
-    </>
   );
 };
 
