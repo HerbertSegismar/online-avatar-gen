@@ -75,15 +75,13 @@ function AvatarDisplay({
       <g transform={`rotate(${face.rotation} ${centerX} ${centerY})`}>
         {/* Face rendered first */}
         <Face face={face} faceX={centerX} faceY={centerY} faceSize={faceSize} />
-
         {/* Hair rendered AFTER face to ensure it appears in front */}
         {hair.style !== "bald" && (
           <Hair
             hair={hair}
             faceX={centerX}
-            hairTop={hairTop}
+            faceY={centerY}
             faceSize={faceSize}
-            faceTop={centerY - faceSize / 2}
           />
         )}
 

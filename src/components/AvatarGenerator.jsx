@@ -82,17 +82,30 @@ function generateRandomEyes() {
 
 function generateRandomMouth() {
   return {
-    type: getRandomItem(["smile", "frown", "neutral", "surprised"]),
-    color: getVibrantColor(),
+    type: getRandomItem([
+      "smile",
+      "grin",
+      "frown",
+      "neutral",
+      "surprised",
+      "smirk",
+      "teeth",
+      "pout",
+      "open",
+    ]),
+    color: "#c66", // Default lip color or use getVibrantColor()
     size: 15 + Math.floor(Math.random() * 15),
   };
 }
 
+// Update your generateRandomAccessories function
+// Updated random generator with nose/ears not always showing
 function generateRandomAccessories() {
   return {
-    glasses: Math.random() > 0.7,
-    hat: Math.random() > 0.8,
-    beard: Math.random() > 0.5 && Math.random() > 0.5,
+    beard: Math.random() > 0.6,
+    mustache: Math.random() > 0.9,
+    nose: Math.random() > 0.8, // 70% chance to show nose
+    ears: Math.random() > 0.9, // 70% chance to show ears
     color: getVibrantColor(),
   };
 }

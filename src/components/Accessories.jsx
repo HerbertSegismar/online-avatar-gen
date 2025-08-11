@@ -1,116 +1,94 @@
+import { getVibrantColor } from "./AvatarGenerator";
 
-function Accessories({
-  accessories,
-  faceX,
-  faceY,
-  faceSize,
-  eyeY,
-  eyeSpacing,
-  padding,
-}) {
-  const { glasses, hat, beard, color } = accessories;
-  const topPadding = padding / 2;
+function Accessories({ accessories, faceX, faceY, faceSize, eyeSpacing }) {
+  const { beard, mustache, nose, ears, color } = accessories;
+  const earSize = faceSize * 0.18;
+  const noseWidth = faceSize * 0.15;
+  const noseHeight = faceSize * 0.2;
 
   return (
     <>
-      {glasses && (
-        <Glasses x={faceX} y={eyeY} spacing={eyeSpacing} color={color} />
+      {/* Organic Ears - only show if enabled */}
+      {ears && (
+        <>
+          {/* Left Ear */}
+          <path
+            d={`M${faceX - eyeSpacing * 1.2} ${faceY - faceSize * 0.1}
+                 Q${faceX - eyeSpacing * 1.3} ${faceY}, 
+                 ${faceX - eyeSpacing * 1.2} ${faceY + faceSize * 0.15}
+                 Q${faceX - eyeSpacing * 0.9} ${faceY + faceSize * 0.1},
+                 ${faceX - eyeSpacing * 0.8} ${faceY - faceSize * 0.05}
+                 Q${faceX - eyeSpacing} ${faceY - faceSize * 0.15},
+                 ${faceX - eyeSpacing * 1.2} ${faceY - faceSize * 0.1}`}
+            fill={color || "#F5CBA7"}
+            stroke="#000"
+            strokeWidth="1"
+          />
+
+          {/* Right Ear */}
+          <path
+            d={`M${faceX + eyeSpacing * 1.2} ${faceY - faceSize * 0.1}
+                 Q${faceX + eyeSpacing * 1.3} ${faceY}, 
+                 ${faceX + eyeSpacing * 1.2} ${faceY + faceSize * 0.15}
+                 Q${faceX + eyeSpacing * 0.9} ${faceY + faceSize * 0.1},
+                 ${faceX + eyeSpacing * 0.8} ${faceY - faceSize * 0.05}
+                 Q${faceX + eyeSpacing} ${faceY - faceSize * 0.15},
+                 ${faceX + eyeSpacing * 1.2} ${faceY - faceSize * 0.1}`}
+            fill={color || "#F5CBA7"}
+            stroke="#000"
+            strokeWidth="1"
+          />
+        </>
       )}
 
-      {hat && (
-        <Hat
-          x={faceX}
-          y={faceY - faceSize / 2}
-          size={faceSize}
-          color={color}
-          padding={topPadding}
+      {/* Organic Nose - only show if enabled */}
+      {nose && (
+        <path
+          d={`M${faceX} ${faceY - faceSize * 0.15}
+               C${faceX + noseWidth * 0.4} ${faceY}, 
+               ${faceX + noseWidth * 0.3} ${faceY + noseHeight}, 
+               ${faceX} ${faceY + noseHeight * 0.8}
+               C${faceX - noseWidth * 0.3} ${faceY + noseHeight}, 
+               ${faceX - noseWidth * 0.4} ${faceY}, 
+               ${faceX} ${faceY - faceSize * 0.15}`}
+          fill={color || "#FFD699"}
+          stroke="#000"
+          strokeWidth="1"
         />
       )}
 
+      {/* Mustache */}
+      {mustache && (
+        <path
+          d={`M${faceX - faceSize * 0.25} ${faceY + faceSize * 0.15}
+               Q${faceX - faceSize * 0.1} ${faceY + faceSize * 0.22}, 
+               ${faceX} ${faceY + faceSize * 0.2}
+               Q${faceX + faceSize * 0.1} ${faceY + faceSize * 0.22}, 
+               ${faceX + faceSize * 0.25} ${faceY + faceSize * 0.15}
+               Q${faceX + faceSize * 0.15} ${faceY + faceSize * 0.25}, 
+               ${faceX} ${faceY + faceSize * 0.23}
+               Q${faceX - faceSize * 0.15} ${faceY + faceSize * 0.25}, 
+               ${faceX - faceSize * 0.25} ${faceY + faceSize * 0.15}`}
+          fill={color || "#333"}
+        />
+      )}
+
+      {/* Beard */}
       {beard && (
-        <Beard x={faceX} y={faceY + 30} size={faceSize} color={color} />
+        <path
+          d={`M${faceX - faceSize * 0.35} ${faceY + faceSize * 0.15}
+               Q${faceX - faceSize * 0.2} ${faceY + faceSize * 0.4}, 
+               ${faceX} ${faceY + faceSize * 0.45}
+               Q${faceX + faceSize * 0.2} ${faceY + faceSize * 0.4}, 
+               ${faceX + faceSize * 0.35} ${faceY + faceSize * 0.15}
+               Q${faceX + faceSize * 0.25} ${faceY + faceSize * 0.5}, 
+               ${faceX} ${faceY + faceSize * 0.55}
+               Q${faceX - faceSize * 0.25} ${faceY + faceSize * 0.5}, 
+               ${faceX - faceSize * 0.35} ${faceY + faceSize * 0.15}`}
+          fill={color || "#333"}
+        />
       )}
     </>
-  );
-}
-
-function Glasses({ x, y, spacing, color }) {
-  return (
-    <g>
-      <rect
-        x={x - spacing - 15}
-        y={y - 8}
-        width={30}
-        height={15}
-        rx="5"
-        fill="none"
-        stroke={color}
-        strokeWidth="2"
-      />
-      <rect
-        x={x + spacing - 15}
-        y={y - 8}
-        width={30}
-        height={15}
-        rx="5"
-        fill="none"
-        stroke={color}
-        strokeWidth="2"
-      />
-      <line
-        x1={x - spacing + 15}
-        y1={y}
-        x2={x + spacing - 15}
-        y2={y}
-        stroke={color}
-        strokeWidth="2"
-      />
-    </g>
-  );
-}
-
-function Hat({ x, y, size, color, padding }) {
-  return (
-    <g>
-      <rect
-        x={x - size / 1.5}
-        y={y - 20 - padding}
-        width={size * 1.3}
-        height={10}
-        rx="5"
-        fill={color}
-      />
-      <rect
-        x={x - size / 2.5}
-        y={y - 50 - padding}
-        width={size * 0.8}
-        height={30}
-        rx="10"
-        fill={color}
-      />
-    </g>
-  );
-}
-
-function Beard({ x, y, size, color }) {
-  return (
-    <g>
-      <path
-        d={`M${x - size /3.4} ${y} 
-             Q${x} ${y + size / 5}, ${x + size / 3} ${y}`}
-        fill={"none"}
-        stroke={color}
-        strokeWidth="3"
-      />
-      <path
-        d={`M${x - size / 4} ${y + 5} 
-             Q${x - size / 9} ${y + size / 4}, ${x} ${y + size / 9}
-             Q${x + size / 7} ${y + size / 4}, ${x + size / 3.5} ${y +4}`}
-        fill={color}
-        stroke={color}
-        strokeWidth="3"
-      />
-    </g>
   );
 }
 
