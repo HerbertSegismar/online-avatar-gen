@@ -1,6 +1,18 @@
 import { clamp } from "./AvatarGenerator";
 
 function Face({ face, faceX, faceY, faceSize }) {
+
+const {
+  shape,
+  color,
+  stripes,
+  stripeColor,
+  stripeCount,
+  stripeWidth,
+  stripeRotation,
+} = face;  const faceTop = faceY - faceSize / 2;
+  const faceHeight = faceSize;
+
   const size = clamp(face.size, 120, 180);
   const jawWidth = size * 0.9;
   const chinY = faceY + size * 0.4;
@@ -115,8 +127,62 @@ function Face({ face, faceX, faceY, faceSize }) {
           fill={face.color}
         />
       )}
+      <g>
+        {/* Base face shape */}
+        {renderFaceShape(shape, faceX, faceY, faceSize, color)}
+
+        {/* Stripes */}
+        {stripes && (
+          <g clipPath={`url(#face-clip-${shape})`}>
+            <g transform={`rotate(${stripeRotation} ${faceX} ${faceY})`}>
+              {Array.from({ length: stripeCount }).map((_, i) => {
+                const spacing = faceSize / (stripeCount + 1);
+                const offset = (i - (stripeCount - 1) / 2) * spacing;
+                return (
+                  <rect
+                    key={i}
+                    x={faceX - faceSize}
+                    y={faceY + offset - stripeWidth / 2}
+                    width={faceSize * 2}
+                    height={stripeWidth}
+                    fill={stripeColor}
+                    opacity={0.7}
+                    rx={stripeWidth / 2}
+                  />
+                );
+              })}
+            </g>
+          </g>
+        )}
+        {/* Clip path matching face shape */}
+        <defs>
+          <clipPath id={`face-clip-${shape}`}>
+            {renderFaceShape(shape, faceX, faceY, faceSize, "black")}
+          </clipPath>
+        </defs>
+      </g>
     </>
   );
+}
+
+function renderFaceShape(shape, x, y, size, color) {
+  switch (shape) {
+    case "circle":
+      return <circle cx={x} cy={y} r={size / 2} fill={color} />;
+    case "square":
+      return (
+        <rect
+          x={x - size / 2}
+          y={y - size / 2}
+          width={size}
+          height={size}
+          fill={color}
+        />
+      );
+    // ... other shape cases ...
+    default:
+      return <circle cx={x} cy={y} r={size / 2} fill={color} />;
+  }
 }
 
 export default Face;

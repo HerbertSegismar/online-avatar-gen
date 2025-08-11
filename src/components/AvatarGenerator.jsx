@@ -51,14 +51,28 @@ function generateRandomFace() {
     bgWidthMultiplier: 1.8 + Math.random() * 0.4,
     bgHeightMultiplier: 2.2 + Math.random() * 0.4,
     bgRoundness: Math.floor(Math.random() * 20) + 10,
+    stripes: Math.random() > 0.7, // 30% chance of stripes
+    stripeColor: getVibrantColor(),
+    stripeCount: Math.floor(Math.random() * 3) + 2, // 2-4 stripes
+    stripeWidth: Math.random() * 15 + 5,
+    stripeRotation: Math.random() * 180 - 90,
   };
 }
 
 function generateRandomHair() {
+  const styles = [
+    "short",
+    "long",
+    "spiky",
+    "curly", // More common hair
+    "beanie",
+    "cap",
+    "fedora", // Less common hats
+  ];
+
   return {
-    style: getRandomItem(["short", "long", "curly", "spiky", "bald"]),
+    style: getRandomItem(styles),
     color: getVibrantColor(),
-    flipped: Math.random() > 0.5,
   };
 }
 
@@ -98,15 +112,41 @@ function generateRandomMouth() {
   };
 }
 
-// Update your generateRandomAccessories function
-// Updated random generator with nose/ears not always showing
+
 function generateRandomAccessories() {
+  const glasses = generateRandomEyeglasses();
   return {
     beard: Math.random() > 0.6,
     mustache: Math.random() > 0.9,
-    nose: Math.random() > 0.8, // 70% chance to show nose
-    ears: Math.random() > 0.9, // 70% chance to show ears
+    nose: Math.random() > 0.3,
+    ears: Math.random() > 0.9,
     color: getVibrantColor(),
+    ...glasses, // Spread the glasses properties
+  };
+}
+
+export function generateRandomEyeglasses() {
+  const styles = ["regular", "full", "sunglasses"];
+  const shapes = [
+    "round",
+    "rectangle",
+    "oval",
+    "cat-eye",
+    "aviator",
+    "hexagon",
+    "octagon",
+    "rounded-square",
+  ];
+  const colors = [
+    /* your color array */
+  ];
+
+  return {
+    eyeglasses: Math.random() > 0.3,
+    eyeglassesStyle: styles[Math.floor(Math.random() * styles.length)],
+    eyeglassesShape: shapes[Math.floor(Math.random() * shapes.length)],
+    eyeglassesColor: colors[Math.floor(Math.random() * colors.length)],
+    eyeglassesOpacity: Math.random() * 0.5 + 0.3,
   };
 }
 
@@ -130,6 +170,32 @@ function AvatarGenerator() {
     setMouth(generateRandomMouth());
     setAccessories(generateRandomAccessories());
     setBackgroundColor(getVibrantColor());
+  };
+
+  const handleNewFace = () => {
+    setFace((prev) => ({
+      ...generateRandomFace(),
+      // Preserve stripe properties if they exist
+      stripes: prev.stripes,
+      stripeColor: prev.stripeColor,
+      stripeCount: prev.stripeCount,
+      stripeWidth: prev.stripeWidth,
+    }));
+  };
+
+  // Add controls to modify stripes
+  const toggleStripes = () => {
+    setFace((prev) => ({
+      ...prev,
+      stripes: !prev.stripes,
+    }));
+  };
+
+  const changeStripeColor = () => {
+    setFace((prev) => ({
+      ...prev,
+      stripeColor: getVibrantColor(),
+    }));
   };
 
   return (
@@ -190,6 +256,44 @@ function AvatarGenerator() {
               New Background
             </button>
           </div>
+          <div className="flex flex-col gap-4">
+            <button onClick={toggleStripes} className="bg-red-400 rounded-full text-slate-200 h-10">
+              {face.stripes ? "Remove Stripes" : "Add Stripes"}
+            </button>
+            {face.stripes && (
+              <>
+                <button onClick={changeStripeColor} className="part-btn">
+                  Change Stripe Color
+                </button>
+                <input
+                  type="range"
+                  min="1"
+                  max="20"
+                  value={face.stripeCount}
+                  onChange={(e) =>
+                    setFace((prev) => ({
+                      ...prev,
+                      stripeCount: parseInt(e.target.value),
+                    }))
+                  }
+                />
+                <input
+                  type="range"
+                  min="3"
+                  max="20"
+                  value={face.stripeWidth}
+                  onChange={(e) =>
+                    setFace((prev) => ({
+                      ...prev,
+                      stripeWidth: parseInt(e.target.value),
+                    }))
+                  }
+                />
+              </>
+            )}
+          </div>
+
+          
 
           <button
             onClick={() =>

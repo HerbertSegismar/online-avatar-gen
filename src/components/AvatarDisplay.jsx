@@ -77,12 +77,7 @@ function AvatarDisplay({
         <Face face={face} faceX={centerX} faceY={centerY} faceSize={faceSize} />
         {/* Hair rendered AFTER face to ensure it appears in front */}
         {hair.style !== "bald" && (
-          <Hair
-            hair={hair}
-            faceX={centerX}
-            faceY={centerY}
-            faceSize={faceSize}
-          />
+          <Hair hair={hair} faceX={centerX} faceY={centerY} faceSize={faceSize} />
         )}
 
         {/* Facial features */}
